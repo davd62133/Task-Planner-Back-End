@@ -40,7 +40,9 @@ public class UserMongoDB implements UserService{
 
     @Override
     public void updateUser(User user) {
-
+        User user1 = ur.findByUsername(user.getUsername());
+        user1.setPassword(user.getPassword());
+        ur.save(user1);
     }
 
     @Override

@@ -45,11 +45,18 @@ public class TaskMongoDB implements TaskService {
     @Override
     public void updateTask(Task task, String userId) {
         int pos = 0;
+        int i = 0;
+        System.out.println("username " + userId);
         User user = ur.findByUsername(userId);
+        System.out.println(user.getUsername());
         List<Task> list = user.getTaskList();
         for(Task t:list){
-            if(t.getId().equals(task.getId())) t = task;
+            if(t.getId().equals(task.getId())) {
+                pos = i;
+            }
+            i++;
         }
+        user.getTaskList().set(pos,task);
         ur.save(user);
     }
 }
