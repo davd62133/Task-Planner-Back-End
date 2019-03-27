@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+
 public class TaskImpl implements TaskService {
     @Autowired
     UserService userService;
@@ -64,7 +64,7 @@ public class TaskImpl implements TaskService {
     }
 
     @Override
-    public void updateTask(Task task) {
+    public void updateTask(Task task, String userId) {
         for(User u:userService.getUsersList()){
             int i = 0;
             int pos = 0;

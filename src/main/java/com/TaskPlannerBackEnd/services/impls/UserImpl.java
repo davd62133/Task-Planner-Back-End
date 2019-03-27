@@ -2,12 +2,11 @@ package com.TaskPlannerBackEnd.services.impls;
 
 import com.TaskPlannerBackEnd.model.User;
 import com.TaskPlannerBackEnd.services.UserService;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+
 public class UserImpl implements UserService {
     List<User> users = new ArrayList<>();
 
@@ -20,7 +19,7 @@ public class UserImpl implements UserService {
     public User getUserById(String id) {
         User user = null;
         for (User u : users){
-            if(u.getId().equals(id)) user = u;
+            if(u.getUsername().equals(id)) user = u;
         }
         return user;
     }
@@ -29,7 +28,7 @@ public class UserImpl implements UserService {
     public boolean createUser(User user) {
         boolean add = true;
         for(User u:users){
-            if(u.getId().equals(user.getId())) add = false;
+            if(u.getUsername().equals(user.getUsername())) add = false;
         }
         if(add) users.add(user);
         return add;
@@ -41,7 +40,7 @@ public class UserImpl implements UserService {
         int pos = 0;
         boolean found = false;
         for(User u:users){
-            if(u.getId().equals(user.getId())){
+            if(u.getUsername().equals(user.getUsername())){
                 pos = i;
                 found = true;
             }
@@ -59,7 +58,7 @@ public class UserImpl implements UserService {
         boolean found = false;
         for(User u:users){
             i++;
-            if(u.getId().equals(userId)){
+            if(u.getUsername().equals(userId)){
                 pos = i;
                 found = true;
             }
@@ -73,7 +72,7 @@ public class UserImpl implements UserService {
     public boolean authorizeUser(String id, String password ) {
         boolean authorize = false;
         for(User u : users){
-            if(u.getId().equals(id) && u.getPassword().equals(password)) authorize=true;
+            if(u.getUsername().equals(id) && u.getPassword().equals(password)) authorize=true;
         }
         return authorize;
     }
@@ -82,7 +81,7 @@ public class UserImpl implements UserService {
     public User findUserByUsernameAndPassword(String username, String password) {
         User user = null;
         for(User u : users){
-            if(u.getId().equals(username) && u.getPassword().equals(password)) user=u;
+            if(u.getUsername().equals(username) && u.getPassword().equals(password)) user=u;
         }
         return user;
     }

@@ -11,5 +11,5 @@ public interface TaskService {
     List<Task> getTasksByUserId(String userId);
     void assignTaskToUser(Task task, String userId);
     void removeTask(String taskId);
-    void updateTask(Task task);
+    void updateTask(Task task, String userId);
 }

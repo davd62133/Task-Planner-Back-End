@@ -1,13 +1,22 @@
 package com.TaskPlannerBackEnd.services.impls;
 
+import com.TaskPlannerBackEnd.Repositories.UserRepository;
 import com.TaskPlannerBackEnd.config.MongoDB;
 import com.TaskPlannerBackEnd.model.User;
 import com.TaskPlannerBackEnd.services.UserService;
+import com.mongodb.BasicDBObject;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public class UserMongoDB implements UserService {
+@Service
+public class UserMongoDB implements UserService{
+
+    @Autowired
+    UserRepository ur;
 
     @Override
     public List<User> getUsersList() {
@@ -21,8 +30,12 @@ public class UserMongoDB implements UserService {
 
     @Override
     public boolean createUser(User user) {
-        MongoDB.db.getCollection("users").insertOne(user.getDocument());
-        return true;
+        if(ur.findByUsername(user.getUsername())==null){
+            ur.save(user);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
@@ -42,6 +55,6 @@ public class UserMongoDB implements UserService {
 
     @Override
     public User findUserByUsernameAndPassword(String username, String password) {
-        return null;
+        return ur.findByUsernameAndPassword(username,password);
     }
 }

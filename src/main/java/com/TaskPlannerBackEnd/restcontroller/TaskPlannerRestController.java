@@ -47,8 +47,8 @@ public class TaskPlannerRestController {
     }
 
     @RequestMapping(path="/updatetask", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateTasks(@RequestBody Task task){
-        taskService.updateTask(task);
+    public ResponseEntity<?> updateTasks(@RequestBody Task task, String userId){
+        taskService.updateTask(task, userId);
         return getResponseEntity();
     }
 

@@ -35,16 +35,16 @@ public class UserController {
 
         String jwtToken = "";
 
-        if (login.getId() == null || login.getPassword() == null) {
+        if (login.getUsername() == null || login.getPassword() == null) {
             throw new ServletException("Please fill in username and password");
         }
 
-        User user = userService.findUserByUsernameAndPassword(login.getId(), login.getPassword());
+        User user = userService.findUserByUsernameAndPassword(login.getUsername(), login.getPassword());
 
         if (user == null) {
             throw new ServletException("Invalid login. Please check your name and password.");
         }
-        jwtToken = Jwts.builder().setSubject(login.getId()).claim("roles", "user").setIssuedAt(new Date()).signWith(
+        jwtToken = Jwts.builder().setSubject(login.getUsername()).claim("roles", "user").setIssuedAt(new Date()).signWith(
                 SignatureAlgorithm.HS256, "secretkey420").compact();
 
         return new Token(jwtToken);

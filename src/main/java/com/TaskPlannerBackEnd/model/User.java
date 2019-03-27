@@ -1,23 +1,26 @@
 package com.TaskPlannerBackEnd.model;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import org.bson.Document;
+import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+
+    @Id
     String id;
+
+    String username;
     String password;
     List<Task> taskList = new ArrayList<>();
 
-    public String getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -40,10 +43,16 @@ public class User {
         taskList.add(task);
     }
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Document getDocument() {
-        return new Document("_id",id)
+        return new Document("_id", username)
                 .append("password",password)
                 .append("taskList",taskList);
     }
