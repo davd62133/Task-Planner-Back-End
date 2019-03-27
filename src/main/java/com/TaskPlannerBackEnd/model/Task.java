@@ -1,5 +1,8 @@
 package com.TaskPlannerBackEnd.model;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
 public class Task {
     String id;
     String description;
@@ -36,5 +39,12 @@ public class Task {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public DBObject getDBObject(){
+        return new BasicDBObject("_id",id)
+                .append("description",description)
+                .append("date",date)
+                .append("status",status);
     }
 }

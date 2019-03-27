@@ -1,5 +1,9 @@
 package com.TaskPlannerBackEnd.model;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import org.bson.Document;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +38,13 @@ public class User {
 
     public void addTask(Task task){
         taskList.add(task);
+    }
+
+
+
+    public Document getDocument() {
+        return new Document("_id",id)
+                .append("password",password)
+                .append("taskList",taskList);
     }
 }
